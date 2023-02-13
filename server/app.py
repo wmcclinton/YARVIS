@@ -110,6 +110,7 @@ def hello_world():
 
 @app.route('/api')
 def rest_hello_world():
+    # TODO Maybe get date range and/or GOOGLE_SHEET_ID 
     def create_ydf_from_google_sheet():
         GOOGLE_SHEET_ID = '1lsdfjD7Nn_t09MceOEkpplY7X2tWs1ea_Kkp7qa9FuY'
         text = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
