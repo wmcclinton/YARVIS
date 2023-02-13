@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>YARVIS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<body class="w3-light-grey">
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:10%;min-width:75px" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()"
+    class="w3-bar-item w3-button">Hide</a>
+    <a href="#daily" onclick="w3_close()" class="w3-bar-item w3-button">Daily</a>
+    <a href="#weekly" onclick="w3_close()" class="w3-bar-item w3-button">Weekly</a>
+    <a href="#monthly" onclick="w3_close()" class="w3-bar-item w3-button">Monthly</a>
+    <a href="#quarterly" onclick="w3_close()" class="w3-bar-item w3-button">Quarterly</a>
+  </nav>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar" id="myNavbar">
+      <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+        <i class="fa fa-bars"></i>
+      </a>
+      <a class="w3-bar-item w3-button"onclick="w3_open()"><i class="fa fa-th"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+        <i class="fa fa-search"></i>
+      </a>
+      <a id="fiat" class="w3-bar-item w3-button w3-hide-small w3-right"><div id="USD">$: 25,000</div></a>
+      <a id="ada" class="w3-bar-item w3-button w3-hide-small w3-right"><div id="ADA">ADA: 10,000</div></a>
+    </div>
+  
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+      <a href="#time" class="w3-bar-item w3-button" onclick="toggleFunction()">DAILY</a>
+      <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+    </div>
+  </div>
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-16"> 
+    <h1><b>YARVIS</b></h1>
+    <p>Welcome to your optimized life <span class="w3-tag">v1.0.0</span></p>
+  </header>
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:2800px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container w3-center w3-padding-64">
+          <img src="icons/5420630751621619965.svg" style="width:10%;height: auto;" alt="Avatar">
+        </div>
+        <div class="w3-container">
+          <hr>
+          <p id="Level" class="w3-large w3-text-theme"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Life Progress: ...</b></p>
+            <p id="Health Level" >Health: ...</p>
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="Health" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:24px;width:30%">30%</div>
+            </div>
+            <p id="Intelligence Level" >Intelligence: ...</p>
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="Intelligence" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:24px;width:55%">55%</div>
+            </div>
+            <p id="Soul Level" >Soul: ...</p>
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="Soul" class="w3-container w3-center w3-round-xlarge w3-teal" style="height:24px;width:25%">25%</div>
+            </div>
+            <hr>
+
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>User Information</b></p>
+            <p><div id="Height">Height: ...</div></p>
+            <p><div id="Weight">Weight: ...</div></p>
+            <p><div id="BMI">BMI: ...</div></p>
+            <p></i><div id="Body Fat">Body Fat: ...</div></p>
+            <br>
+        </div>
+      </div>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Middle Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+        <div class="w3-container">
+            <h2 class="w3-large"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Time Allocation</h2>
+            <canvas id="myPieChart" style="padding:25px;"></canvas>
+        </div>
+      </div>
+
+      <div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+        <div class="w3-container">
+            <h2 class="w3-large"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Progress Chart</h2>
+            <canvas id="myLineChart" style="padding:25px;"></canvas>
+        </div>
+      </div>
+
+      <div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+        <div class="w3-container">
+            <h2 class="w3-large"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>YARVIS OUTPUT</h2>
+            <textarea readonly name="output_text" cols="45" rows="10"></textarea>
+            <br>
+            <br>
+        </div>
+      </div>
+    <!-- End Right Column -->
+    </div>
+
+  <!-- Right Column -->
+  <div class="w3-third">
+    <div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+        <div class="w3-container">
+            <p class="w3-large"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</p>
+            <p id="AI Research Level">AI Research (Intelligence): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="AI Research" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Crypto Development Level">Crypto Development (Intelligence): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Crypto Development" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+  
+
+            <p id="Quantitative Finance Level">Quantitative Finance (Intelligence): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Quantitative Finance" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Russian Level">Russian (Intelligence): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Russian" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Brazilian Jiu Jistu Level">Brazilian Jiu Jistu (Health): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Brazilian Jiu Jistu" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="YouTube Content Creator Level">YouTube Content Creator (Soul): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="YouTube Content Creator" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Business Acumen Level">Business Acumen (Intelligence): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Business Acumen" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Alpha Male Level">Alpha Male (Health): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Alpha Male" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <p id="Sigma Male Level">Sigma Male (Soul): ...</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div id="Sigma Male" class="w3-container w3-center w3-round-xlarge w3-teal" style="width:10%">10%</div>
+            </div>
+
+            <hr>
+            <p class="w3-large"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>YARVIS INPUT (vCHAT-GPT)</p>
+            <textarea name="paragraph_text" cols="50" rows="10"></textarea>
+            <br>
+            <br>
+            
+            
+        </div>
+    </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+<script src="index.js" type="text/javascript"></script>
+</body>
+</html>
